@@ -1,0 +1,58 @@
+/* TEAM NAV */
+#nav-container {
+  text-align: center;
+  overflow: auto;
+}
+
+#club-navbar {
+  display: -webkit-inline-box;
+}
+
+#TOT img {
+  height: 3rem;
+  width: auto;
+}
+
+#nav-container div.item {
+  cursor: pointer;
+}
+
+#nav-container div.item:hover {
+  background-color: transparent;
+  box-shadow: none;
+  border-color: darkred;
+}
+
+/* TEAM CONTENT */
+.card-header {
+  background-color: green !important;
+}
+
+div.ui.fluid.card div.card-header div.card-label {
+  color: white;
+}
+
+#content-container {
+  margin-top: 20px;
+}
+
+#table-standings {
+  padding: 10px 10px;
+  overflow: auto;
+}
+
+@media screen and (min-width:990px){
+  .desktop-table {
+    display: none;
+  }
+}
+
+@media screen and (max-width:990px){
+  #table-standings {
+    padding: 0px;
+  }
+
+  .mobile-table {
+    display: none;
+  }
+}
