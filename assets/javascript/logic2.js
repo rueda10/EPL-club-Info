@@ -93,19 +93,12 @@ $.ajax({
  */
 function createTeamsNav() {
   var mainDiv = $("#clubs");
-
-  var navContainer = $('<div id="nav-container">');
-  var contentContainer = $('<div id="content-container">');
-
-  navContainer.appendTo(mainDiv);
-  contentContainer.appendTo(mainDiv);
-
-  var nav = $('<div class="ui secondary pointing menu" id="club-navbar">')
+  $("#club-navbar").empty();
 
   $.each(teams, function(index, team) {
     var teamBadge = $('<div class="item" id=' + team.short_name + '><img class="badge-icon" src="' + team.crestUrl + '"></div>');
 
-    teamBadge.appendTo(nav);
+    $("#club-navbar").append(teamBadge);
 
     teamBadge.on("click", function() {
       $('.ui .item').removeClass('active');
@@ -116,120 +109,90 @@ function createTeamsNav() {
     });
   });
 
-  nav.appendTo(navContainer);
+  $("#club-navbar").appendTo("#nav-container");
 }
 
 function createTeamsPage(teamId) {
   var teamCode = getTeamCode(teamId);
   // get team function
   var contentContainer = $("#content-container");
-  contentContainer.empty();
-
-  var grid = $('<div class="ui three column stackable grid container">');
-  var leftColumn = $('<div class="four wide column">');
-  var centerColumn = $('<div class="nine wide column">');
-  var rightColumn = $('<div class="three wide column">');
+  // contentContainer.empty();
 
   // INJURIES BOX
-  var injuries = $('<div class="ui fluid card">');
-  var injuriesTopContent = $('<div class="content card-header">');
-  var injuriesTopContentHeader = $('<div class="header card-label">Injuries</div>');
-  var injuriesBottomContent = $('<div class="content">');
-
+  $("#injuries-content").empty();
   var playerName = undefined;
   $.each(eplData, function(index, player) {
     if (player.team_code === teamCode) {
       if (player.status === "i" || player.status === "d") {
         playerName = $('<h2 class="ui sub header">' + player.first_name + ' ' + player.second_name + '</h4>');
-        playerName.appendTo(injuriesBottomContent);
+        $("#injuries-content").append(playerName);
 
         var injuryInfo = $('<div>' + player.news + '</div>');
-        injuryInfo.appendTo(injuriesBottomContent);
+        $("#injuries-content").append(injuryInfo);
       }
     }
   });
 
   if (playerName === undefined) {
     playerName = $('<h4 class="ui sub header">No Injuries</h4>');
-    playerName.appendTo(injuriesBottomContent);
+    $("#injuries-content").append(playerName);
   }
 
-  injuriesTopContentHeader.appendTo(injuriesTopContent);
-  injuriesTopContent.appendTo(injuries);
-  injuriesBottomContent.appendTo(injuries);
-  injuries.appendTo(leftColumn);
-
   // GENERAL INFORMATION BOX
-  var info = $('<div class="ui fluid card">');
-  var infoTopContent = $('<div class="content card-header">');
-  var infoTopContentHeader = $('<div class="header card-label">Team information</div>');
-  var infoBottomContent = $('<div class="content">');
-
+  $("#team-info-content").empty();
   // TOP SCORER
+
   var topScorerData = getTopScorer(teamId);
   var topScorerLabel = $('<h2 class="ui sub header">Top Scorer(s)</h2>');
-  topScorerLabel.appendTo(infoBottomContent);
+  $("#team-info-content").append(topScorerLabel);
   for (var i = 0; i < topScorerData[0].length; i++) {
     var topScorer = $('<div>' + topScorerData[0][i] + ': ' + topScorerData[1] + ' goals</div>');
-    topScorer.appendTo(infoBottomContent);
+    $("#team-info-content").append(topScorer);
   }
 
   // CLEAN SHEETS
   var cleanSheetsData = getCleanSheets(teamId);
   var cleanSheetsLabel = $('<h2 class="ui sub header">Clean Sheets: ' + cleanSheetsData + '</h2>');
-  cleanSheetsLabel.appendTo(infoBottomContent);
+  $("#team-info-content").append(cleanSheetsLabel);
 
   // HOME RECORD
   var homeRecordLabel = $('<h2 class="ui sub header">Home Record</h2>');
-  homeRecordLabel.appendTo(infoBottomContent);
+  $("#team-info-content").append(homeRecordLabel);
   $.each(standing, function(index, team) {
     if (team.teamName.toLowerCase().includes(getTeamName(teamId).toLowerCase())) {
       var homeWins = $('<div>Wins: ' + team.home.wins + '</div>');
-      homeWins.appendTo(infoBottomContent);
+      $("#team-info-content").append(homeWins);
       var homeLosses = $('<div>Losses: ' + team.home.losses + '</div>');
-      homeLosses.appendTo(infoBottomContent);
+      $("#team-info-content").append(homeLosses);
       var homeDraws = $('<div>Draws: ' + team.home.draws + '</div>');
-      homeDraws.appendTo(infoBottomContent);
+      $("#team-info-content").append(homeDraws);
       var homeGoalsScored = $('<div>Goals Scored: ' + team.home.goals + '</div>');
-      homeGoalsScored.appendTo(infoBottomContent);
+      $("#team-info-content").append(homeGoalsScored);
       var homeGoalsAgainst = $('<div>Goals Against: ' + team.home.goalsAgainst + '</div>');
-      homeGoalsAgainst.appendTo(infoBottomContent);
+      $("#team-info-content").append(homeGoalsAgainst);
     }
   });
 
   // AWAY RECORD
   var awayRecordLabel = $('<h2 class="ui sub header">Away Record</h2>');
-  awayRecordLabel.appendTo(infoBottomContent);
+  $("#team-info-content").append(awayRecordLabel);
   $.each(standing, function(index, team) {
     if (team.teamName.toLowerCase().includes(getTeamName(teamId).toLowerCase())) {
       var awayWins = $('<div>Wins: ' + team.away.wins + '</div>');
-      awayWins.appendTo(infoBottomContent);
+      $("#team-info-content").append(awayWins);
       var awayLosses = $('<div>Losses: ' + team.away.losses + '</div>');
-      awayLosses.appendTo(infoBottomContent);
+      $("#team-info-content").append(awayLosses);
       var awayDraws = $('<div>Draws: ' + team.away.draws + '</div>');
-      awayDraws.appendTo(infoBottomContent);
+      $("#team-info-content").append(awayDraws);
       var awayGoalsScored = $('<div>Goals Scored: ' + team.away.goals + '</div>');
-      awayGoalsScored.appendTo(infoBottomContent);
+      $("#team-info-content").append(awayGoalsScored);
       var awayGoalsAgainst = $('<div>Goals Against: ' + team.away.goalsAgainst + '</div>');
-      awayGoalsAgainst.appendTo(infoBottomContent);
+      $("#team-info-content").append(awayGoalsAgainst);
     }
   });
 
-  infoTopContentHeader.appendTo(infoTopContent);
-  infoTopContent.appendTo(info);
-  infoBottomContent.appendTo(info);
-  info.appendTo(leftColumn);
-
   // STANDINGS
-  var standings = $('<div class="ui fluid card">');
-  var standingsTopContent = $('<div class="content card-header">');
-  var standingsTopContentHeader = $('<div class="header card-label">Standings</div>');
-  var standingsBottomContent = $('<div id="table-standings" class="content">');
-
-  var table = $('<table class="ui celled compact unstackable striped table">');
-  var thead = $('<thead><tr><th>Pos</th><th>Club</th><th>P</th><th>W</th><th>D</th><th>L</th><th>GF</th><th>GA</th><th class="mobile-table">GD</th><th>Pts</th></tr></head>');
-  thead.appendTo(table);
-  var tbody = $('<tbody>');
+  $("#table-standings-content").empty();
   $.each(standing, function(index, team) {
     var tr = $('<tr>');
     if (team.teamName.toLowerCase().includes(getTeamName(teamId).toLowerCase())) {
@@ -248,22 +211,11 @@ function createTeamsPage(teamId) {
                         team.points + '</td>');
 
     td.appendTo(tr);
-    tr.appendTo(tbody);
+    $("#table-standings-content").append(tr);
   });
 
-  tbody.appendTo(table);
-  table.appendTo(standingsBottomContent);
-  standingsTopContentHeader.appendTo(standingsTopContent);
-  standingsTopContent.appendTo(standings);
-  standingsBottomContent.appendTo(standings);
-  standings.appendTo(centerColumn);
-
   // NEWS
-  var news = $('<div class="ui fluid card">');
-  var newsTopContent = $('<div class="content card-header">');
-  var newsTopContentHeader = $('<div class="header card-label">Team News</div>');
-  var newsBottomContent = $('<div class="content">');
-
+  $("#team-news-content").empty();
   var articleLabel = undefined;
 
   $.each(newsArray, function(index, newsArticle) {
@@ -273,9 +225,9 @@ function createTeamsPage(teamId) {
       if (newsArticle.webTitle.toLowerCase().includes(tag.toLowerCase()) ||
           newsArticle.webUrl.toLowerCase().includes(tag.toLowerCase())) {
         articleLabel = $('<h2 class="ui sub header">' + newsArticle.webTitle + '</h2>');
-        articleLabel.appendTo(newsBottomContent);
+        $("#team-news-content").append(articleLabel);
         var readMore = $('<div><a href=' + newsArticle.webUrl + ' target="_blank">Read More...</a></div>')
-        readMore.appendTo(newsBottomContent);
+        $("#team-news-content").append(readMore);
         return false;
       }
     });
@@ -283,19 +235,9 @@ function createTeamsPage(teamId) {
 
   if (articleLabel === undefined) {
     articleLabel = $('<h2 class="ui sub header">No News</h2>');
-    articleLabel.appendTo(newsBottomContent);
+    $("#team-news-content").append(articleLabel);
   }
 
-  newsTopContentHeader.appendTo(newsTopContent);
-  newsTopContent.appendTo(news);
-  newsBottomContent.appendTo(news);
-  news.appendTo(rightColumn);
-
-  leftColumn.appendTo(grid);
-  centerColumn.appendTo(grid);
-  rightColumn.appendTo(grid);
-
-  grid.appendTo(contentContainer);
 }
 
 /**
