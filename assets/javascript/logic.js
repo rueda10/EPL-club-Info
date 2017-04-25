@@ -240,7 +240,7 @@ function createTeamsPage(teamId) {
   var standingsBottomContent = $('<div id="table-standings" class="content">');
 
   var table = $('<table class="ui celled compact unstackable striped table">');
-  var thead = $('<thead><tr><th>Pos</th><th>Club</th><th>P</th><th>W</th><th>D</th><th>L</th><th>GF</th><th>GA</th><th class="mobile-table">GD</th><th>Pts</th></tr></head>');
+  var thead = $('<thead><tr><th>Pos</th><th>Club</th><th class="mobile-table">P</th><th>W</th><th>D</th><th>L</th><th>GF</th><th>GA</th><th class="mobile-table">GD</th><th>Pts</th></tr></head>');
   thead.appendTo(table);
   var tbody = $('<tbody>');
   $.each(standing, function(index, team) {
@@ -250,7 +250,7 @@ function createTeamsPage(teamId) {
     }
     var td = $('<td>' + team.position + '</td><td class="mobile-table">' +
                         team.teamName + '</td><td class="desktop-table">' +
-                        getTeamId(team.teamName) + '</td><td>' +
+                        getTeamId(team.teamName) + '</td><td class="mobile-table">' +
                         team.playedGames + '</td><td>' +
                         team.wins + '</td><td>' +
                         team.draws + '</td><td>' +

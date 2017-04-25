@@ -207,7 +207,7 @@ function createTeamsPage(teamId) {
     }
     var td = $('<td>' + team.position + '</td><td class="mobile-table">' +
                         team.teamName + '</td><td class="desktop-table">' +
-                        getTeamId(team.teamName) + '</td><td>' +
+                        getTeamId(team.teamName) + '</td><td class="mobile-table">' +
                         team.playedGames + '</td><td>' +
                         team.wins + '</td><td>' +
                         team.draws + '</td><td>' +
