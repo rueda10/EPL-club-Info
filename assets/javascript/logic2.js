@@ -50,7 +50,7 @@ $.ajax({
     console.log(newsArray);
 
     $.ajax({
-      url: "http://jokecamp.github.io/epl-fantasy-geek/js/static-data.json",
+      url: "https://jokecamp.github.io/epl-fantasy-geek/js/static-data.json",
       method: "GET"
     }).done(function(response) {
       console.log(response);
