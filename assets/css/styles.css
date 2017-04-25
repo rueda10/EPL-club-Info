@@ -41,18 +41,34 @@ div.ui.fluid.card div.card-header div.card-label {
   overflow: auto;
 }
 
-@media screen and (min-width:990px){
-  .desktop-table {
-    display: none;
-  }
-}
-
-@media screen and (max-width:990px){
+@media screen and (max-width:600px){
   #table-standings {
     padding: 0px;
   }
 
   .mobile-table {
+    display: none;
+  }
+}
+
+@media screen and (min-width:600px) and (max-width:768px){
+  .desktop-table {
+    display: none;
+  }
+}
+
+@media screen and (min-width:768px) and (max-width:990px){
+  #table-standings {
+    padding: 0px;
+  }
+
+  .mobile-table {
+    display: none;
+  }
+}
+
+@media screen and (min-width:990px){
+  .desktop-table {
     display: none;
   }
 }
