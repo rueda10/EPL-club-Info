@@ -97,10 +97,15 @@ function createTeamsNav() {
   $("#loader").toggleClass("hidden");
   $("#clubs").toggleClass("hidden");
 
+  createTeamsPage("ARS");
+
   $.each(teams, function(index, team) {
     var teamBadge = $('<div class="item" id=' + team.short_name + '><img class="badge-icon" src="' + team.crestUrl + '"></div>');
 
     $("#club-navbar").append(teamBadge);
+    if (team.short_name === "ARS") {
+      teamBadge.addClass("active");
+    }
 
     teamBadge.on("click", function() {
       $('.ui .item').removeClass('active');
