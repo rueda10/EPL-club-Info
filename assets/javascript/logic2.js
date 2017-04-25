@@ -97,8 +97,6 @@ function createTeamsNav() {
   $("#loader").toggleClass("hidden");
   $("#clubs").toggleClass("hidden");
 
-  createTeamsPage("ARS");
-
   $.each(teams, function(index, team) {
     var teamBadge = $('<div class="item" id=' + team.short_name + '><img class="badge-icon" src="' + team.crestUrl + '"></div>');
 
@@ -117,6 +115,8 @@ function createTeamsNav() {
   });
 
   $("#club-navbar").appendTo("#nav-container");
+
+  createTeamsPage("ARS");
 }
 
 function createTeamsPage(teamId) {

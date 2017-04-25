@@ -109,12 +109,15 @@ function createTeamsNav() {
   navContainer.appendTo(mainDiv);
   contentContainer.appendTo(mainDiv);
 
-  var nav = $('<div class="ui secondary pointing menu" id="club-navbar">')
+  var nav = $('<div class="ui secondary pointing menu" id="club-navbar">');
 
   $.each(teams, function(index, team) {
     var teamBadge = $('<div class="item" id=' + team.short_name + '><img class="badge-icon" src="' + team.crestUrl + '"></div>');
 
     teamBadge.appendTo(nav);
+    if (team.short_name === "ARS") {
+      teamBadge.addClass("active");
+    }
 
     teamBadge.on("click", function() {
       $('.ui .item').removeClass('active');
@@ -126,6 +129,7 @@ function createTeamsNav() {
   });
 
   nav.appendTo(navContainer);
+  createTeamsPage("ARS");
 }
 
 function createTeamsPage(teamId) {
