@@ -29,6 +29,13 @@ var badges = [
   "https://platform-static-files.s3.amazonaws.com/premierleague/badges/t21.svg"
 ];
 
+var loaderDiv = $("#loader");
+var dimmer = $('<div class="ui active inverted dimmer">');
+var loader = $('<div id="club-loader" class="ui text loader">Loading</div>');
+
+loader.appendTo(dimmer);
+dimmer.appendTo(loaderDiv);
+
 /**
  * Make football-data API call, and once done, get jokecamp JSON. Put all
  * necessary data in variables and create DOM elements
@@ -93,6 +100,8 @@ $.ajax({
  */
 function createTeamsNav() {
   var mainDiv = $("#clubs");
+  loaderDiv.toggleClass("hidden");
+  mainDiv.toggleClass("hidden");
 
   var navContainer = $('<div id="nav-container">');
   var contentContainer = $('<div id="content-container">');

@@ -41,6 +41,10 @@ div.ui.fluid.card div.card-header div.card-label {
   overflow: auto;
 }
 
+.hidden {
+  display: none;
+}
+
 @media screen and (max-width:600px){
   #table-standings {
     padding: 0px;

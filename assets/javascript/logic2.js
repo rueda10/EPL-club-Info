@@ -94,6 +94,8 @@ $.ajax({
 function createTeamsNav() {
   var mainDiv = $("#clubs");
   $("#club-navbar").empty();
+  $("#loader").toggleClass("hidden");
+  $("#clubs").toggleClass("hidden");
 
   $.each(teams, function(index, team) {
     var teamBadge = $('<div class="item" id=' + team.short_name + '><img class="badge-icon" src="' + team.crestUrl + '"></div>');
